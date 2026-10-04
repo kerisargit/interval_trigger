@@ -1,0 +1,7 @@
+interval_trigger.settings:
+  path: '/admin/config/system/interval-trigger'
+  defaults:
+    _form: '\Drupal\interval_trigger\Form\SettingsForm'
+    _title: 'Interval Trigger'
+  requirements:
+    _permission: 'administer interval trigger'

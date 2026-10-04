@@ -1,0 +1,4 @@
+administer interval trigger:
+  title: 'Administer Interval Trigger'
+  description: 'Configure the minimum interval between task checks on regular site requests (debounce).'
+  restrict access: true

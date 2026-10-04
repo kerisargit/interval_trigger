@@ -1,0 +1,84 @@
+# Russian translation of interval_trigger.
+msgid ""
+msgstr ""
+"Project-Id-Version: interval_trigger\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20)) ? 1 : 2));\n"
+
+msgid "Infrastructure for tasks with their own interval that must be checked not only on hook_cron() but also on regular site requests, in case the site cron runs rarely."
+msgstr "Инфраструктура для задач с собственным интервалом, которые нужно проверять не только на hook_cron(), но и на обычных обращениях к сайту — на случай, если внешний cron сайта настроен редко."
+
+msgid "Minimum interval between task checks on regular site requests."
+msgstr "Минимальный промежуток между проверками задач на обычных обращениях к сайту."
+
+msgid "Administer Interval Trigger"
+msgstr "Администрирование Interval Trigger"
+
+msgid "Configure the minimum interval between task checks on regular site requests (debounce)."
+msgstr "Настройка минимального промежутка между проверками задач на обычных обращениях к сайту (debounce)."
+
+msgid "Minimum interval between real checks on the \"regular site requests\" channel, in seconds"
+msgstr "Минимальный промежуток между реальными проверками на канале \"обычные обращения к сайту\", секунд"
+
+msgid "Task @task (@id): @stage failed with an exception: @class: @message"
+msgstr "Задача @task (@id): @stage упал с исключением: @class: @message"
+
+msgid "Minimum interval between checks on the \"regular site requests\" channel (seconds)"
+msgstr "Минимальный промежуток между проверками на канале «обычные обращения к сайту» (секунд)"
+
+msgid "The value must be between 0 and 3600 seconds."
+msgstr "Значение должно быть от 0 до 3600 секунд."
+
+msgid "The check fires on every request to the site; this value limits real task checks to at most once per N seconds. 0 disables the limit. Requires the PHP apcu extension; without it there is no limit."
+msgstr "Проверка срабатывает на каждый запрос к сайту; это значение ограничивает реальные проверки задач — не чаще раза в N секунд. 0 — без ограничения. Нужно PHP-расширение apcu, без него ограничения нет."
+
+msgid "@text <a href=\":url\">More…</a>"
+msgstr "@text <a href=\":url\">Подробнее…</a>"
+
+msgid "Interval Trigger: checks on site requests"
+msgstr "Interval Trigger: проверки на обращениях к сайту"
+
+msgid "What the module does"
+msgstr "Что делает модуль"
+
+msgid "Interval Trigger runs tasks that have their own interval (for example, Views Path Rotator). Tasks are checked on cron and, if a task allows it, also at the end of regular requests to the site, after the response has been sent. This helps when the site cron runs less often than the task interval."
+msgstr "Interval Trigger запускает задачи с собственным интервалом (например, Views Path Rotator). Задачи проверяются при запуске cron и, если задача это разрешает, ещё и в конце обычных обращений к сайту, после отправки ответа. Это выручает, когда cron сайта запускается реже, чем интервал задачи."
+
+msgid "Limiting checks under load"
+msgstr "Ограничение проверок под нагрузкой"
+
+msgid "The end-of-request check fires on every request to the site, not only on pages related to a task. Under normal load it is cheap, but during a flood of requests (for example, a DDoS) even cheap work adds up exactly when the server is already struggling."
+msgstr "Проверка в конце запроса срабатывает на каждый запрос к сайту, а не только на страницах, связанных с задачей. При обычной нагрузке это дёшево, но при потоке запросов (например, DDoS) даже дешёвая работа складывается в заметную нагрузку — ровно тогда, когда серверу и так тяжело."
+
+msgid "The <em>minimum interval between checks</em> setting limits real checks to at most once per N seconds, however many requests arrive. Task intervals are usually measured in minutes, so a few seconds of delay do not matter. 0 disables the limit; the default is 5 seconds."
+msgstr "Настройка <em>минимального промежутка между проверками</em> ограничивает реальные проверки — не чаще раза в N секунд, сколько бы запросов ни пришло. Интервалы задач обычно измеряются минутами, так что несколько секунд задержки на них не влияют. 0 отключает ограничение; по умолчанию — 5 секунд."
+
+msgid "The limit relies on the PHP <em>apcu</em> extension. Without it the limit silently does not work: the site keeps working, but every request runs the check. Make sure apcu is installed and enabled on production."
+msgstr "Ограничение работает через PHP-расширение <em>apcu</em>. Без него оно молча не действует: сайт не ломается, но проверка идёт на каждый запрос. Стоит убедиться, что apcu установлено и включено на проде."
+
+msgid "Configuring"
+msgstr "Настройка"
+
+msgid "Set the minimum interval on the @settings_link settings page."
+msgstr "Минимальный промежуток задаётся на странице настроек @settings_link."
+
+msgid "Interval Trigger — request debounce"
+msgstr "Interval Trigger — пауза между проверками"
+
+msgid "Disabled (0 seconds): due tasks are checked on every request."
+msgstr "Выключена (0 секунд): задачи проверяются на каждом запросе."
+
+msgid "Unknown from the command line; check the status report in the browser."
+msgstr "Из командной строки не определить; посмотрите отчёт о состоянии в браузере."
+
+msgid "Active: at most one check every @n seconds."
+msgstr "Работает: не чаще одной проверки раз в @n с."
+
+msgid "Not working: the PHP APCu extension is unavailable."
+msgstr "Не работает: PHP-расширение APCu недоступно."
+
+msgid "Due tasks are checked on every request. The site works, but under heavy load (for example a bot flood) this adds avoidable work. Install and enable APCu."
+msgstr "Задачи проверяются на каждом запросе. Сайт работает, но под большой нагрузкой (например, при наплыве ботов) это лишняя работа. Установите и включите APCu."

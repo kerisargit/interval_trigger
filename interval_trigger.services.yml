@@ -1,0 +1,21 @@
+services:
+  interval_trigger.runner:
+    class: Drupal\interval_trigger\IntervalTaskRunner
+    arguments:
+      - '@logger.factory'
+    tags:
+      - { name: service_collector, tag: interval_trigger.task, call: addTask }
+  interval_trigger.debounce_gate:
+    class: Drupal\interval_trigger\ApcuDebounceGate
+    arguments:
+      - '@datetime.time'
+      - '@config.factory'
+  Drupal\interval_trigger\DebounceGateInterface: '@interval_trigger.debounce_gate'
+  interval_trigger.terminate_subscriber:
+    class: Drupal\interval_trigger\EventSubscriber\TerminateSubscriber
+    arguments:
+      - '@service_container'
+      - '@interval_trigger.debounce_gate'
+      - '@config.factory'
+    tags:
+      - { name: event_subscriber }

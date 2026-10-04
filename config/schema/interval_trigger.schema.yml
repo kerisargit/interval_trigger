@@ -1,0 +1,7 @@
+interval_trigger.settings:
+  type: config_object
+  label: 'Interval Trigger settings'
+  mapping:
+    debounce_seconds:
+      type: integer
+      label: 'Minimum interval between real checks on the "regular site requests" channel, in seconds'

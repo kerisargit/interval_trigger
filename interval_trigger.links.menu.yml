@@ -1,0 +1,6 @@
+interval_trigger.settings:
+  title: 'Interval Trigger'
+  description: 'Minimum interval between task checks on regular site requests.'
+  parent: system.admin_config_system
+  route_name: interval_trigger.settings
+  weight: 10

@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for Interval Trigger.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function interval_trigger_requirements($phase) {
+  if ($phase !== 'runtime') {
+    return [];
+  }
+  $requirement = [
+    'title' => t('Interval Trigger — request debounce'),
+  ];
+  $seconds = (int) \Drupal::config('interval_trigger.settings')->get('debounce_seconds');
+
+  if ($seconds === 0) {
+    $requirement['value'] = t('Disabled (0 seconds): due tasks are checked on every request.');
+    $requirement['severity'] = REQUIREMENT_INFO;
+  }
+  elseif (PHP_SAPI === 'cli') {
+    // apc.enable_cli is usually off, so drush cannot tell what the web
+    // server has.
+    $requirement['value'] = t('Unknown from the command line; check the status report in the browser.');
+    $requirement['severity'] = REQUIREMENT_INFO;
+  }
+  elseif (\function_exists('apcu_enabled') && apcu_enabled()) {
+    $requirement['value'] = t('Active: at most one check every @n seconds.', ['@n' => $seconds]);
+    $requirement['severity'] = REQUIREMENT_OK;
+  }
+  else {
+    $requirement['value'] = t('Not working: the PHP APCu extension is unavailable.');
+    $requirement['description'] = t('Due tasks are checked on every request. The site works, but under heavy load (for example a bot flood) this adds avoidable work. Install and enable APCu.');
+    $requirement['severity'] = REQUIREMENT_WARNING;
+  }
+
+  return ['interval_trigger_debounce' => $requirement];
+}

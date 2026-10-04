@@ -1,0 +1,16 @@
+---
+label: 'Interval Trigger: checks on site requests'
+top_level: true
+related:
+  - core.cron
+---
+{% set settings_link_text %}{% trans %}Interval Trigger{% endtrans %}{% endset %}
+{% set settings_link = render_var(help_route_link(settings_link_text, 'interval_trigger.settings')) %}
+<h2>{% trans %}What the module does{% endtrans %}</h2>
+<p>{% trans %}Interval Trigger runs tasks that have their own interval (for example, Views Path Rotator). Tasks are checked on cron and, if a task allows it, also at the end of regular requests to the site, after the response has been sent. This helps when the site cron runs less often than the task interval.{% endtrans %}</p>
+<h2>{% trans %}Limiting checks under load{% endtrans %}</h2>
+<p>{% trans %}The end-of-request check fires on every request to the site, not only on pages related to a task. Under normal load it is cheap, but during a flood of requests (for example, a DDoS) even cheap work adds up exactly when the server is already struggling.{% endtrans %}</p>
+<p>{% trans %}The <em>minimum interval between checks</em> setting limits real checks to at most once per N seconds, however many requests arrive. Task intervals are usually measured in minutes, so a few seconds of delay do not matter. 0 disables the limit; the default is 5 seconds.{% endtrans %}</p>
+<p>{% trans %}The limit relies on the PHP <em>apcu</em> extension. Without it the limit silently does not work: the site keeps working, but every request runs the check. Make sure apcu is installed and enabled on production.{% endtrans %}</p>
+<h2>{% trans %}Configuring{% endtrans %}</h2>
+<p>{% trans %}Set the minimum interval on the {{ settings_link }} settings page.{% endtrans %}</p>

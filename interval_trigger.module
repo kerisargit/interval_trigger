@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Interval Trigger: runs registered interval tasks on cron.
+ */
+
+/**
+ * Implements hook_cron().
+ */
+function interval_trigger_cron() {
+  \Drupal::service('interval_trigger.runner')->runDueTasks('cron');
+}

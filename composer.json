@@ -1,0 +1,9 @@
+{
+    "name": "kerisargit/interval_trigger",
+    "type": "drupal-custom-module",
+    "description": "Runs interval tasks on cron and after page requests, with an APCu debounce.",
+    "require": {
+        "php": ">=8.1",
+        "drupal/core": "^10 || ^11"
+    }
+}

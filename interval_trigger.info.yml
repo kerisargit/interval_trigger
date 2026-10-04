@@ -1,0 +1,9 @@
+name: 'Interval Trigger'
+type: module
+description: 'Infrastructure for tasks with their own interval that must be checked not only on hook_cron() but also on regular site requests, in case the site cron runs rarely.'
+package: 'Other'
+core_version_requirement: ^10 || ^11
+version: 1.0.0
+configure: interval_trigger.settings
+'interface translation project': interval_trigger
+'interface translation server pattern': modules/custom/interval_trigger/translations/%project.%language.po
